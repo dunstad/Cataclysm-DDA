@@ -1538,7 +1538,7 @@ void activity_handlers::game_do_turn( player_activity *act, player *p )
         game_item.ammo_consume( 1, p->pos() );
         p->add_morale( MORALE_GAME, 1, 100 ); //1 points/min, almost 2 hours to fill
     }
-    if( game_item.ammo_remaining() == 0 ) {
+    if( game_item.units_remaining( *p ) == 0 ) {
         act->moves_left = 0;
         add_msg( m_info, _( "The %s runs out of batteries." ), game_item.tname() );
     }
