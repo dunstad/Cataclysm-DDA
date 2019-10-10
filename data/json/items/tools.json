@@ -1970,21 +1970,12 @@
   {
     "id": "elec_chainsaw_off",
     "type": "TOOL",
+    "copy-from": "chainsaw_off",
     "name": "electric chainsaw (off)",
     "name_plural": "electric chainsaws (off)",
     "description": "This is a lumbering tool moonlighting as weapon of opportunity.  If loaded with batteries, using this item will cause it to turn on, turning it into a very powerful but unwieldy melee weapon.",
-    "weight": "6577 g",
-    "volume": "2500 ml",
-    "price": 8000,
-    "to_hit": -4,
-    "bashing": 10,
-    "material": [ "steel", "plastic" ],
-    "symbol": "/",
-    "color": "red",
     "ammo": "battery",
-    "techniques": "SWEEP",
     "use_action": "ELEC_CHAINSAW_OFF",
-    "flags": [ "NONCONDUCTIVE" ],
     "magazines": [
       [
         "battery",
@@ -1995,19 +1986,23 @@
   },
   {
     "id": "elec_chainsaw_on",
-    "copy-from": "elec_chainsaw_off",
     "type": "TOOL",
+    "copy-from": "chainsaw_on",
     "name": "electric chainsaw (on)",
     "name_plural": "electric chainsaws (on)",
     "description": "This electric chainsaw is on and making a lot of noise.  Use it to turn it off.",
-    "to_hit": -5,
-    "bashing": 4,
-    "cutting": 70,
     "power_draw": 2000000,
+    "//": "erasing the normal chainsaw's turns_per_charge in favor of power_draw",
+    "turns_per_charge": 0,
     "revert_to": "elec_chainsaw_off",
-    "qualities": [ [ "AXE", 4 ], [ "BUTCHER", -100 ] ],
+    "ammo": "battery",
     "use_action": "ELEC_CHAINSAW_ON",
-    "flags": [ "MESSY", "TRADER_AVOID", "NONCONDUCTIVE", "POWERED" ],
+    "magazines": [
+      [
+        "battery",
+        [ "medium_battery_cell", "medium_plus_battery_cell", "medium_atomic_battery_cell", "medium_disposable_cell" ]
+      ]
+    ],
     "magazine_well": 2
   },
   {
