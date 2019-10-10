@@ -3014,7 +3014,7 @@ static int toolweapon_off( player &p, item &it, const bool fast_startup,
                            const std::string &msg_success, const std::string &msg_failure )
 {
     p.moves -= fast_startup ? 60 : 80;
-    if( condition && it.units_sufficient( p ) ) {
+    if( condition ) {
         if( it.typeId() == "chainsaw_off" ) {
             sfx::play_variant_sound( "chainsaw_cord", "chainsaw_on", sfx::get_heard_volume( p.pos() ) );
             sfx::play_variant_sound( "chainsaw_start", "chainsaw_on", sfx::get_heard_volume( p.pos() ) );
@@ -3024,7 +3024,11 @@ static int toolweapon_off( player &p, item &it, const bool fast_startup,
                                              sfx::channel::chainsaw_theme,
                                              3000 );
         }
-        sounds::sound( p.pos(), volume, sounds::sound_t::combat, msg_success );
+        p.add_msg_if_player( _( "%d" ), volume );
+        p.add_msg_if_player( msg_success );
+        p.add_msg_if_player( _( "%s" ), condition ? "true" : "false" );
+        sounds::sound( p.pos(), volume, sounds::sound_t::combat, msg_success, false, "chainsaw_start",
+                       "chainsaw_on" );
         it.convert( it.typeId().substr( 0, it.typeId().size() - 4 ) + "_on" ); // 4 is the length of "_off".
         it.active = true;
     } else {
@@ -3058,7 +3062,7 @@ int iuse::chainsaw_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater(),
+                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->ammo_sufficient(),
                            20, _( "With a roar, the chainsaw leaps to life!" ),
                            _( "You yank the cord, but nothing happens." ) );
 }
@@ -3067,7 +3071,7 @@ int iuse::elec_chainsaw_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater(),
+                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->units_sufficient( *p ),
                            20, _( "With a roar, the electric chainsaw leaps to life!" ),
                            _( "You flip the switch, but nothing happens." ) );
 }
