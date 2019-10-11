@@ -3024,11 +3024,10 @@ static int toolweapon_off( player &p, item &it, const bool fast_startup,
                                              sfx::channel::chainsaw_theme,
                                              3000 );
         }
-        p.add_msg_if_player( _( "%d" ), volume );
-        p.add_msg_if_player( msg_success );
-        p.add_msg_if_player( _( "%s" ), condition ? "true" : "false" );
-        sounds::sound( p.pos(), volume, sounds::sound_t::combat, msg_success, false, "chainsaw_start",
+        sounds::sound( p.pos(), volume, sounds::sound_t::combat, _( "a chainsaw starting!" ), false,
+                       "chainsaw_start",
                        "chainsaw_on" );
+        p.add_msg_if_player( msg_success );
         it.convert( it.typeId().substr( 0, it.typeId().size() - 4 ) + "_on" ); // 4 is the length of "_off".
         it.active = true;
     } else {
