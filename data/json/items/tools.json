@@ -1975,6 +1975,8 @@
     "name_plural": "electric chainsaws (off)",
     "description": "This is a lumbering tool moonlighting as weapon of opportunity.  If loaded with batteries, using this item will cause it to turn on, turning it into a very powerful but unwieldy melee weapon.",
     "ammo": "battery",
+    "//": "erasing the normal chainsaw's max_charges",
+    "max_charges": 0,
     "use_action": "ELEC_CHAINSAW_OFF",
     "magazines": [
       [

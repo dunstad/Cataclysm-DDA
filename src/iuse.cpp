@@ -3079,7 +3079,7 @@ int iuse::cs_lajatang_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->ammo_sufficient( *p ),
+                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->ammo_sufficient(),
                            40, _( "With a roar, the chainsaws leap to life!" ),
                            _( "You yank the cords, but nothing happens." ) );
 }
