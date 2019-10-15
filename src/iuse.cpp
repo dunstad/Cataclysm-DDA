@@ -3043,7 +3043,7 @@ int iuse::combatsaw_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            true,
-                           !p->is_underwater(),
+                           !p->is_underwater() && it->ammo_sufficient(),
                            30, _( "With a snarl, the combat chainsaw screams to life!" ),
                            _( "You yank the cord, but nothing happens." ) );
 }
@@ -3052,7 +3052,7 @@ int iuse::e_combatsaw_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            true,
-                           !p->is_underwater(),
+                           !p->is_underwater() && it->units_sufficient( *p ),
                            30, _( "With a snarl, the electric combat chainsaw screams to life!" ),
                            _( "You flip the switch, but nothing happens." ) );
 }
@@ -3070,7 +3070,7 @@ int iuse::elec_chainsaw_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->units_sufficient( *p ),
+                           rng( 6, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->units_sufficient( *p ),
                            20, _( "With a roar, the electric chainsaw leaps to life!" ),
                            _( "You flip the switch, but nothing happens." ) );
 }
@@ -3079,7 +3079,7 @@ int iuse::cs_lajatang_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && it->units_sufficient( *p ) && !p->is_underwater(),
+                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->ammo_sufficient( *p ),
                            40, _( "With a roar, the chainsaws leap to life!" ),
                            _( "You yank the cords, but nothing happens." ) );
 }
@@ -3088,7 +3088,7 @@ int iuse::ecs_lajatang_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 5 && it->ammo_remaining() > 1 && !p->is_underwater(),
+                           rng( 6, 10 ) - it->damage_level( 4 ) > 5 && !p->is_underwater() && it->units_sufficient( *p ),
                            40, _( "With a buzz, the chainsaws leap to life!" ),
                            _( "You flip the on switch, but nothing happens." ) );
 }
@@ -3097,7 +3097,7 @@ int iuse::carver_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           true,
+                           it->units_sufficient( *p ),
                            20, _( "The electric carver's serrated blades start buzzing!" ),
                            _( "You pull the trigger, but nothing happens." ) );
 }
@@ -3106,7 +3106,7 @@ int iuse::trimmer_off( player *p, item *it, bool, const tripoint & )
 {
     return toolweapon_off( *p, *it,
                            false,
-                           rng( 0, 10 ) - it->damage_level( 4 ) > 3,
+                           rng( 0, 10 ) - it->damage_level( 4 ) > 3 && it->ammo_sufficient(),
                            15, _( "With a roar, the hedge trimmer leaps to life!" ),
                            _( "You yank the cord, but nothing happens." ) );
 }
