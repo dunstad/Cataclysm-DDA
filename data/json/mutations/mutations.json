@@ -5727,6 +5727,7 @@
     "id": "THRESH_PLANT",
     "name": "Plant",
     "points": 1,
+    "ignored_by": [ "PLANT" ],
     "description": "Well, you still have those other walking flowers-and the mushrooms too-to deal with.  But you'll manage.",
     "valid": false,
     "purifiable": false,
