@@ -1439,6 +1439,9 @@ void player::recalc_speed_bonus()
         }
         const float temperature_speed_modifier = mutation_value( "temperature_speed_modifier" );
         if( temperature_speed_modifier != 0 ) {
+            const units::energy human_specific_heat_kgF = 6.3_kJ; // hopefully not changed too much by mutation
+            const units::energy human_heat_radiation = 100_J;
+            const units::energy test_power_draw = 100000_mJ;
             const auto player_local_temp = g->weather.get_temperature( pos() );
             if( has_trait( trait_COLDBLOOD4 ) || player_local_temp < 65 ) {
                 mod_speed_bonus( ( player_local_temp - 65 ) * temperature_speed_modifier );
