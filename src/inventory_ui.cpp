@@ -1634,6 +1634,12 @@ inventory_selector::inventory_selector( const player &u, const inventory_selecto
     ctxt.register_action( "ANY_INPUT" ); // For invlets
     ctxt.register_action( "INVENTORY_FILTER" );
 
+#if defined(__ANDROID__)
+    for( const char g->u.inv.assigned_invlet : invlet ) {
+        ctxt.register_manual_key( invlet, g->u.inv.assigned_invlet[invlet] );
+    }
+#endif
+
     append_column( own_inv_column );
     append_column( map_column );
     append_column( own_gear_column );
