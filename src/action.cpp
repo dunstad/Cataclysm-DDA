@@ -590,7 +590,7 @@ bool can_move_vertical_at( const tripoint &p, int movez )
     if( movez == -1 ) {
         return g->m.has_flag( "GOES_DOWN", p );
     } else {
-        return g->m.has_flag( "GOES_UP", p );
+        return g->m.has_flag( "GOES_UP", p ) || g->m.has_flag( "LADDER", p );
     }
 }
 
